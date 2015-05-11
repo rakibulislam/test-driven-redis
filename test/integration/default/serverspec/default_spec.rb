@@ -12,4 +12,17 @@ describe 'test-driven-redis::default' do
     it { should be_directory }
   end
 
+  describe port(6379) do
+    it { should be_listening }
+  end
+
+  describe service('redis6379') do
+    it { should be_enabled }
+    it { should be_running }
+  end
+
+  describe command('/usr/local/bin/redis-cli ping') do
+    its(:stdout) { should match('PONG') }
+  end
+
 end
