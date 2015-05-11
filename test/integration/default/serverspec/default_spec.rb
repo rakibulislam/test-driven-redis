@@ -25,4 +25,12 @@ describe 'test-driven-redis::default' do
     its(:stdout) { should match('PONG') }
   end
 
+  describe command('/usr/local/bin/redis-cli set devopsdays "is awesome"') do
+    its(:exit_status) { should eq 0 }
+  end
+
+  describe command('/usr/local/bin/redis-cli get devopsdays') do
+    its(:stdout) { should match('is awesome') }
+  end
+
 end
